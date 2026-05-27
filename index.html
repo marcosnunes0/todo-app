@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+	<title>To-Do List App</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <main>
+        <div class="title">
+            <h1>Todo App</h1>
+        </div>
+        <div class="tasks-container">
+            <div class="tasks-header">
+                <h2>Tasks</h2>
+            </div>
+            <div class="options">
+                <div class="add-task">
+                    <button id="add-task-btn"><i class="fa-solid fa-plus"></i> Add Task</button>
+                </div>
+                <div class="delete-tasks">
+                    <button id="delete-tasks-btn"><i class="fa-solid fa-trash"></i> Delete Tasks</button>
+                </div>
+                <div class="filter">
+                    <select name="filter" id="filter">
+                        <option value="all">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="js-tasks-list-grid"></div>
+        <div id="js-add-task-form-container"></div>
+    </main>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+    <script src="scripts/storage.js"></script>
+    <script src="scripts/filters.js"></script>
+    <script src="scripts/tasks.js"></script>
+    <script src="scripts/ui.js"></script>
+	<script src="scripts/app.js"></script>
+</body>
+</html>
