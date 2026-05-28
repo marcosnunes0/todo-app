@@ -40,10 +40,10 @@ function renderAddTaskForm(categories) {
 
     const formHTML = `
         <div id="blur-overlay" class="overlay">
-            <div class="form-container">
+            <div class="add-task-form-container">
                 <button id="close-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
                 <div class="form-header">
-                    <h2 class="add-task-form-title">Add Task</h2>
+                    <h2 class="form-title">Add Task</h2>
                 </div>
                 <form action="">
                     <div class="form-title-container">
@@ -79,4 +79,45 @@ function renderAddTaskForm(categories) {
     `;
 
     document.getElementById('js-add-task-form-container').innerHTML = formHTML;
+};
+
+function renderAddCategoryForm() {
+    const formHTML = `
+        <div id="blur-overlay" class="overlay">
+            <div class="add-category-form-container">
+                <button id="close-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <div class="form-header">
+                    <h2 class="add-category-form-title">Add Category</h2>
+                </div>
+                <form action="">
+                    <div class="form-title-container">
+                        <label for="category-title">Title</label>
+                        <div class="input-box">
+                            <input type="text" id="category-title-input" name="category-title" placeholder="Enter the category title" required>
+                        </div>
+                    </div>
+                    <div class="form-submit-btn-container">
+                        <button type="submit" id="js-add-category-submit-btn" class="add-category-submit-btn">Add Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('js-add-category-form-container').innerHTML = formHTML;
+};
+
+function handleOverlayEvents() {
+    const overlay = document.getElementById('blur-overlay');
+    const closeFormButton = document.getElementById('close-form-btn');
+
+    closeFormButton.addEventListener('click', () => {
+        overlay.classList.add('hidden');
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.classList.add('hidden');
+        }
+    });
 };

@@ -52,7 +52,7 @@ body {
 }
 
 .add-task,
-.delete-tasks {
+.add-category {
     position: relative;
     display: flex;
     align-items: flex-end;
@@ -78,12 +78,12 @@ body {
     background-color: #21402d;
 }
 
-#delete-tasks-btn {
+#add-category-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.3rem;
-    background-color: #b10c0c;
+    background-color: rgb(31, 136, 27);
     color: white;
     border: none;
     border-radius: 5px;
@@ -199,10 +199,32 @@ body {
     pointer-events: none;
 }
 
-.form-container {
+.add-task-form-container {
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: 70vh;
+    width: 40vw;
+    min-height: 300px;
+    min-width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.add-task-form-container form,
+.add-category-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 55vh;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.add-category-form-container {
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
     width: 40vw;
     min-height: 300px;
     min-width: 300px;
@@ -222,15 +244,6 @@ body {
     font-weight: bold;
 }
 
-.form-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    height: 55vh;
-    margin-left: 2rem;
-    margin-right: 2rem;
-}
-
 .form-title-container {
     display: flex;
     align-items: flex-start;
@@ -238,6 +251,10 @@ body {
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+}
+
+.add-category-form-container .form-title-container {
+    margin-top: 2rem;
 }
 
 .input-box {
@@ -275,6 +292,10 @@ body {
     font-weight: bold;
 }
 
+.form-priority-container {
+    margin-top: 0;
+}
+
 .form-priority-container select,
 .form-category-container select,
 .form-due-date-container input[type="date"] {
@@ -289,14 +310,24 @@ body {
     cursor: pointer;
 }
 
+.form-due-date-container {
+    margin-bottom: 2rem;
+}
+
 .form-submit-btn-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
+    width: 100%;
 }
 
-.add-task-submit-btn {
+.add-category-form-container .form-submit-btn-container {
+    margin-top: 0;
+}
+
+.add-task-submit-btn,
+.add-category-submit-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -309,7 +340,8 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-    width: 50%;
+    width: 25%;
+    min-width: 150px;
     font-weight: bold;
     font-size: 1rem;
 }
