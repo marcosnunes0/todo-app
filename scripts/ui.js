@@ -2,6 +2,21 @@ function colorPicker(task) {
     return task.completed ? 'green' : 'red';
 };
 
+function handleOverlayEvents() {
+    const overlay = document.getElementById('blur-overlay');
+    const closeFormButton = document.getElementById('close-form-btn');
+
+    closeFormButton.addEventListener('click', () => {
+        overlay.classList.add('hidden');
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.classList.add('hidden');
+        }
+    });
+};
+
 function renderTasks(tasks) {
     let tasksHTML = '';
 
@@ -107,17 +122,46 @@ function renderAddCategoryForm() {
     document.getElementById('js-add-category-form-container').innerHTML = formHTML;
 };
 
-function handleOverlayEvents() {
-    const overlay = document.getElementById('blur-overlay');
-    const closeFormButton = document.getElementById('close-form-btn');
+function renderEditTaskForm(task, categories) {
+    const formHTML = `
+        <div id="blur-overlay" class="overlay">
+            <div class="add-task-form-container">
+                <button id="close-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <div class="form-header">
+                    <h2 class="form-title">Edit Task</h2>
+                </div>
+                <form action="">
+                    <div class="form-title-container">
+                        <label for="task-title">Title</label>
+                        <div class="input-box">
+                            <input type="text" id="task-title-input" name="task-title" placeholder="Enter the task title" required value="${task.title}">
+                        </div>
+                    </div>
+                    <div class="form-priority-container">
+                        <label for="task-priority">Priority</label>
+                        <select class="form-select" name="task-priority" id="task-priority-select" value="${task.priority}">
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="form-category-container">
+                        <label for="task-category">Category</label>
+                        <select class="form-select" name="task-category" id="task-category-select" value="${task.category}">
+                            ${categories.map((category) => {return `<option value="${category}">${category}</option>`;})}
+                        </select>
+                    </div>
+                    <div class="form-due-date-container">
+                        <label for="task-date">Due Date</label>
+                        <input type="date" id="task-date-input" name="task-date" required value="${task.dueDate}">
+                    </div>
+                    <div class="form-submit-btn-container">
+                        <button type="submit" id="js-add-task-submit-btn" class="add-task-submit-btn">Edit Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
 
-    closeFormButton.addEventListener('click', () => {
-        overlay.classList.add('hidden');
-    });
-
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            overlay.classList.add('hidden');
-        }
-    });
+    document.getElementById('js-add-task-form-container').innerHTML = formHTML;
 };

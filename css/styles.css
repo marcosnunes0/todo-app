@@ -139,6 +139,14 @@ body {
     }
 }
 
+@media (max-width: 402px) {
+    #add-task-btn,
+    #add-category-btn,
+    .filter select {
+        font-size: 0.5rem;
+    }
+}
+
 .task-checkbox-title-container {
     grid-column: 1;
     display: flex;
@@ -146,6 +154,7 @@ body {
     justify-content: flex-start;
     gap: 1rem;
     margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .task-priority-container {
@@ -153,6 +162,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 1rem;
 }
 
 .task-category-container {
@@ -160,6 +170,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 1rem;
 }
 
 .task-due-date-container {
@@ -167,6 +178,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 1rem;
 }
 
 .task-actions-container {
@@ -176,6 +188,37 @@ body {
     justify-content: flex-end;
     gap: 1rem;
     margin-right: 1rem;
+}
+
+.edit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+    background-color: #5a645e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+    background-color: #c90a0aff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    opacity: 0.8;
 }
 
 .overlay {
