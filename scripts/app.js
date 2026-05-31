@@ -1,5 +1,5 @@
 const addTaskButton = document.getElementById('add-task-btn');
-const addCategoryButton = document.getElementById('add-category-btn');
+const categoriesButton = document.getElementById('categories-btn');
 
 function initApp() {
     renderTasks(tasks);
@@ -11,9 +11,19 @@ function initApp() {
         handleOverlayEvents();
     });
 
-    addCategoryButton.addEventListener('click', () => {
-        renderAddCategoryForm();
+    categoriesButton.addEventListener('click', () => {
+        renderCategories(categories);
         handleOverlayEvents();
+
+        const addCategoryButton = document.getElementById('add-category-btn');
+
+        addCategoryButton.addEventListener('click', () => {
+            const overlay = document.getElementById('blur-overlay');
+            overlay.classList.add('hidden');
+            
+            renderAddCategoryForm();
+            handleOverlayEvents();
+        });
     });
 
     editTaskButton.forEach((button) => {

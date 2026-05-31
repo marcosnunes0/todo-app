@@ -96,6 +96,45 @@ function renderAddTaskForm(categories) {
     document.getElementById('js-add-task-form-container').innerHTML = formHTML;
 };
 
+function renderCategories(categories) {
+    let categoryItemsHTML = '';
+
+    categories.forEach((category) => {
+        categoryItemsHTML += `
+                <div class="category-item">
+                    <span class="category-title">${category.title}</span>
+                    <div class="category-actions-container">
+                        <button class="category-edit-btn" data-category-id="${category.id}"><i class="fa-solid fa-pen"></i></button>
+                        <button class="category-delete-btn" data-category-id="${category.id}"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+        `;
+    });
+
+    const categoriesHTML = `
+        <div id="blur-overlay" class="overlay">
+            <div class="category-container">
+                <button id="close-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <div class="category-header-container">
+                    <h2>Categories</h2>
+                </div>
+                <div class="add-category-btn-container">
+                    <button id="add-category-btn" class="add-category-btn"><i class="fa-solid fa-plus"></i> Add Category</button>
+                </div>
+                <div id="categories-grid-container" class="categories-grid-container">
+                    ${categoryItemsHTML}
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('js-categories-grid').innerHTML = categoriesHTML;
+
+    const container = document.getElementById('categories-grid-container');
+    const numberOfRows = categories.length;
+    container.style.setProperty('--rows', numberOfRows);
+}
+
 function renderAddCategoryForm() {
     const formHTML = `
         <div id="blur-overlay" class="overlay">

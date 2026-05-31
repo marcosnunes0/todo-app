@@ -1,4 +1,17 @@
-const categories = ['Work', 'Personal', 'Other'];
+const categories = [
+    {
+        id: crypto.randomUUID(),
+        title: 'Work'
+    },
+    {
+        id: crypto.randomUUID(),
+        title: 'Personal'
+    },
+    {
+        id: crypto.randomUUID(),
+        title: 'Other'
+    }
+];
 
 const tasks = [
     {
