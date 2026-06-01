@@ -20,11 +20,17 @@ function handleOverlayEvents() {
 function renderTasks(tasks) {
     let tasksHTML = '';
 
-    tasks.forEach((task) => {
-    
-        const color = colorPicker(task);
+    if (tasks.length === 0) {
+        tasksHTML = `
+            <div class="no-tasks-found-container">
+                <span>No tasks found</span>
+            </div>
+        `;
+    } else {
+        tasks.forEach((task) => {
+            const color = colorPicker(task);
 
-        tasksHTML += `
+            tasksHTML += `
             <div class="task">
                 <div class="task-checkbox-title-container">
                     <input type="checkbox" class="checkbox" data-task-id="${task.id}" ${task.completed ? 'checked' : ''}>
@@ -46,7 +52,8 @@ function renderTasks(tasks) {
                 </div>
             </div>
         `;
-    });
+        });
+    }
 
     document.getElementById('js-tasks-list-grid').innerHTML = tasksHTML;
 };
@@ -78,7 +85,7 @@ function renderAddTaskForm(categories) {
                     <div class="form-category-container">
                         <label for="task-category">Category</label>
                         <select class="form-select" name="task-category" id="task-category-select">
-                            ${categories.map((category) => {return `<option value="${category}">${category}</option>`;})}
+                            ${categories.map((category) => {return `<option value="${category.id}">${category.title}</option>`;})}
                         </select>
                     </div>
                     <div class="form-due-date-container">
