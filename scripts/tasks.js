@@ -56,3 +56,22 @@ function deleteTask (tasks, taskId) {
         tasks.splice(taskIndex, 1);
     }
 };
+
+function toggleTaskStatus(tasks, taskId) {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    if (taskIndex !== -1) {
+        tasks[taskIndex].completed = !tasks[taskIndex].completed;
+    }
+};
+
+function editTask(tasks, taskId, title, priority, category, dueDate) {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    if (taskIndex !== -1) {
+        tasks[taskIndex].title = title.trim();
+        tasks[taskIndex].priority = priority;
+        tasks[taskIndex].category = category;
+        tasks[taskIndex].dueDate = dueDate;
+    }
+};

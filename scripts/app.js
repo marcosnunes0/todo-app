@@ -46,19 +46,43 @@ function initApp() {
         tasksListGrid.addEventListener('click', (e) => {
             const deleteButton = e.target.closest('.delete-btn');
             const editButton = e.target.closest('.edit-btn');
+            const checkBox = e.target.closest('.checkbox');
 
             if (deleteButton) {
                 const taskId = deleteButton.dataset.taskId;
                 deleteTask(tasks, taskId);
                 renderTasks(tasks);
-            }
+            };
 
             if (editButton) {
                 const taskId = editButton.dataset.taskId;
                 const task = tasks.find(task => task.id === taskId);
                 renderEditTaskForm(task, categories);
                 handleOverlayEvents('edit-task-overlay', 'close-edit-task-form-btn');
-            }
+
+                const editTaskSubmitButton = document.getElementById('js-edit-task-submit-btn');
+
+                editTaskSubmitButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const title = document.getElementById('task-title-input').value;
+                    const priority = document.getElementById('task-priority-select').value;
+                    const category = document.getElementById('task-category-select').value;
+                    const dueDate = document.getElementById('task-date-input').value;
+
+                    editTask(tasks, taskId, title, priority, category, dueDate);
+                    renderTasks(tasks);
+                    
+                    const overlay = document.getElementById('edit-task-overlay');
+                    overlay.classList.add('hidden');
+                });
+            };
+
+            if (checkBox) {
+                const taskId = checkBox.dataset.taskId;
+                toggleTaskStatus(tasks, taskId);
+                renderTasks(tasks);
+            };
         });
     }
 };

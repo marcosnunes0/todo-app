@@ -192,15 +192,15 @@ function renderEditTaskForm(task, categories) {
                     <div class="form-priority-container">
                         <label for="task-priority">Priority</label>
                         <select class="form-select" name="task-priority" id="task-priority-select" value="${task.priority}">
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
                         </select>
                     </div>
                     <div class="form-category-container">
                         <label for="task-category">Category</label>
-                        <select class="form-select" name="task-category" id="task-category-select" value="${task.category}">
-                            ${categories.map((category) => {return `<option value="${category}">${category}</option>`;})}
+                        <select class="form-select" name="task-category" id="task-category-select" value="${task.category.title}">
+                            ${categories.map((category) => {return `<option value="${category.title}">${category.title}</option>`;})}
                         </select>
                     </div>
                     <div class="form-due-date-container">
@@ -208,7 +208,7 @@ function renderEditTaskForm(task, categories) {
                         <input type="date" id="task-date-input" name="task-date" required value="${task.dueDate}">
                     </div>
                     <div class="form-submit-btn-container">
-                        <button type="submit" id="js-add-task-submit-btn" class="add-task-submit-btn">Edit Task</button>
+                        <button type="submit" id="js-edit-task-submit-btn" class="add-task-submit-btn">Edit Task</button>
                     </div>
                 </form>
             </div>
