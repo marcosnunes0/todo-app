@@ -2,19 +2,23 @@ function colorPicker(task) {
     return task.completed ? 'green' : 'red';
 };
 
-function handleOverlayEvents() {
-    const overlay = document.getElementById('blur-overlay');
-    const closeFormButton = document.getElementById('close-form-btn');
+function handleOverlayEvents(overlayId = 'blur-overlay', closeBtnId = 'close-form-btn') {
+    const overlay = document.getElementById(overlayId);
+    const closeFormButton = document.getElementById(closeBtnId);
 
-    closeFormButton.addEventListener('click', () => {
-        overlay.classList.add('hidden');
-    });
-
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
+    if (closeFormButton) {
+        closeFormButton.addEventListener('click', () => {
             overlay.classList.add('hidden');
-        }
-    });
+        });
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.classList.add('hidden');
+            }
+        });
+    }
 };
 
 function renderTasks(tasks) {
@@ -61,35 +65,37 @@ function renderTasks(tasks) {
 function renderAddTaskForm(categories) {
 
     const formHTML = `
-        <div id="blur-overlay" class="overlay">
+        <div id="add-task-overlay" class="overlay">
             <div class="add-task-form-container">
-                <button id="close-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <button id="close-add-task-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
                 <div class="form-header">
                     <h2 class="form-title">Add Task</h2>
                 </div>
                 <form action="">
                     <div class="form-title-container">
-                        <label for="task-title">Title</label>
+                        <label for="task-title-input">Title</label>
                         <div class="input-box">
                             <input type="text" id="task-title-input" name="task-title" placeholder="Enter the task title" required>
                         </div>
                     </div>
                     <div class="form-priority-container">
-                        <label for="task-priority">Priority</label>
-                        <select class="form-select" name="task-priority" id="task-priority-select">
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
+                        <label for="task-priority-select">Priority</label>
+                        <select class="form-select" name="task-priority" id="task-priority-select" required>
+                            <option value="" disabled selected>Selecione uma prioridade</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
                         </select>
                     </div>
                     <div class="form-category-container">
-                        <label for="task-category">Category</label>
-                        <select class="form-select" name="task-category" id="task-category-select">
-                            ${categories.map((category) => {return `<option value="${category.id}">${category.title}</option>`;})}
+                        <label for="task-category-select">Category</label>
+                        <select class="form-select" name="task-category" id="task-category-select" required>
+                            <option value="" disabled selected>Selecione uma categoria</option>
+                            ${categories.map((category) => {return `<option value="${category.title}">${category.title}</option>`;})}
                         </select>
                     </div>
                     <div class="form-due-date-container">
-                        <label for="task-date">Due Date</label>
+                        <label for="task-date-input">Due Date</label>
                         <input type="date" id="task-date-input" name="task-date" required>
                     </div>
                     <div class="form-submit-btn-container">
@@ -119,9 +125,9 @@ function renderCategories(categories) {
     });
 
     const categoriesHTML = `
-        <div id="blur-overlay" class="overlay">
+        <div id="categories-overlay" class="overlay">
             <div class="category-container">
-                <button id="close-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <button id="close-categories-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
                 <div class="category-header-container">
                     <h2>Categories</h2>
                 </div>
@@ -144,15 +150,15 @@ function renderCategories(categories) {
 
 function renderAddCategoryForm() {
     const formHTML = `
-        <div id="blur-overlay" class="overlay">
+        <div id="add-category-overlay" class="overlay">
             <div class="add-category-form-container">
-                <button id="close-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <button id="close-add-category-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
                 <div class="form-header">
                     <h2 class="add-category-form-title">Add Category</h2>
                 </div>
                 <form action="">
                     <div class="form-title-container">
-                        <label for="category-title">Title</label>
+                        <label for="category-title-input">Title</label>
                         <div class="input-box">
                             <input type="text" id="category-title-input" name="category-title" placeholder="Enter the category title" required>
                         </div>
@@ -170,9 +176,9 @@ function renderAddCategoryForm() {
 
 function renderEditTaskForm(task, categories) {
     const formHTML = `
-        <div id="blur-overlay" class="overlay">
+        <div id="edit-task-overlay" class="overlay">
             <div class="add-task-form-container">
-                <button id="close-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <button id="close-edit-task-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
                 <div class="form-header">
                     <h2 class="form-title">Edit Task</h2>
                 </div>

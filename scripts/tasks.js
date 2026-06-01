@@ -33,3 +33,18 @@ const tasks = [
         createdAt: new Date().toISOString().slice(0,10)
     }
 ];
+
+function addTask(title, priority, category, dueDate) {
+
+    const newTask = {
+        id: crypto.randomUUID(),
+        title: title.trim(),
+        completed: false,
+        priority: priority,
+        category: category,
+        dueDate: dueDate,
+        createdAt: new Date().toISOString().slice(0, 10)
+    };
+    
+    tasks.push(newTask);
+}
