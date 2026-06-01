@@ -47,4 +47,12 @@ function addTask(title, priority, category, dueDate) {
     };
     
     tasks.push(newTask);
-}
+};
+
+function deleteTask (tasks, taskId) {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    if (taskIndex !== -1) {
+        tasks.splice(taskIndex, 1);
+    }
+};

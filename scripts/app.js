@@ -1,10 +1,9 @@
 const addTaskButton = document.getElementById('add-task-btn');
 const categoriesButton = document.getElementById('categories-btn');
+const tasksListGrid = document.getElementById('js-tasks-list-grid');
 
 function initApp() {
     renderTasks(tasks);
-
-    const editTaskButton = document.querySelectorAll('.edit-btn');
 
     addTaskButton.addEventListener('click', () => {
         renderAddTaskForm(categories);
@@ -43,14 +42,25 @@ function initApp() {
         });
     });
 
-    editTaskButton.forEach((button) => {
-        button.addEventListener('click', () => {
-            const taskId = button.dataset.taskId;
-            const task = tasks.find(task => task.id === taskId);
-            renderEditTaskForm(task, categories);
-            handleOverlayEvents('edit-task-overlay', 'close-edit-task-form-btn');
+    if (tasksListGrid) {
+        tasksListGrid.addEventListener('click', (e) => {
+            const deleteButton = e.target.closest('.delete-btn');
+            const editButton = e.target.closest('.edit-btn');
+
+            if (deleteButton) {
+                const taskId = deleteButton.dataset.taskId;
+                deleteTask(tasks, taskId);
+                renderTasks(tasks);
+            }
+
+            if (editButton) {
+                const taskId = editButton.dataset.taskId;
+                const task = tasks.find(task => task.id === taskId);
+                renderEditTaskForm(task, categories);
+                handleOverlayEvents('edit-task-overlay', 'close-edit-task-form-btn');
+            }
         });
-    });
+    }
 };
 
 initApp();
