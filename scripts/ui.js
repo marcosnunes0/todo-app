@@ -21,6 +21,12 @@ function handleOverlayEvents(overlayId = 'blur-overlay', closeBtnId = 'close-for
     }
 };
 
+function hiddenOverlay(overlayId = 'blur-overlay') {
+    const overlay = document.getElementById(overlayId);
+
+    if (overlay) overlay.classList.add('hidden');
+}
+
 function renderTasks(tasks) {
     let tasksHTML = '';
 
@@ -109,6 +115,51 @@ function renderAddTaskForm(categories) {
     document.getElementById('js-add-task-form-container').innerHTML = formHTML;
 };
 
+
+function renderEditTaskForm(task, categories) {
+    const formHTML = `
+        <div id="edit-task-overlay" class="overlay">
+            <div class="add-task-form-container">
+                <button id="close-edit-task-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <div class="form-header">
+                    <h2 class="form-title">Edit Task</h2>
+                </div>
+                <form action="">
+                    <div class="form-title-container">
+                        <label for="task-title">Title</label>
+                        <div class="input-box">
+                            <input type="text" id="task-title-input" name="task-title" placeholder="Enter the task title" required value="${task.title}">
+                        </div>
+                    </div>
+                    <div class="form-priority-container">
+                        <label for="task-priority">Priority</label>
+                        <select class="form-select" name="task-priority" id="task-priority-select" value="${task.priority}">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                    <div class="form-category-container">
+                        <label for="task-category">Category</label>
+                        <select class="form-select" name="task-category" id="task-category-select" value="${task.category.title}">
+                            ${categories.map((category) => {return `<option value="${category.title}">${category.title}</option>`;})}
+                        </select>
+                    </div>
+                    <div class="form-due-date-container">
+                        <label for="task-date">Due Date</label>
+                        <input type="date" id="task-date-input" name="task-date" required value="${task.dueDate}">
+                    </div>
+                    <div class="form-submit-btn-container">
+                        <button type="submit" id="js-edit-task-submit-btn" class="add-task-submit-btn">Edit Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('js-add-task-form-container').innerHTML = formHTML;
+};
+
 function renderCategories(categories) {
     let categoryItemsHTML = '';
 
@@ -158,9 +209,9 @@ function renderAddCategoryForm() {
                 </div>
                 <form action="">
                     <div class="form-title-container">
-                        <label for="category-title-input">Title</label>
+                        <label for="add-category-title-input">Title</label>
                         <div class="input-box">
-                            <input type="text" id="category-title-input" name="category-title" placeholder="Enter the category title" required>
+                            <input type="text" id="add-category-title-input" class="add-category-title-input" name="category-title" placeholder="Enter the category title" required>
                         </div>
                     </div>
                     <div class="form-submit-btn-container">
@@ -174,46 +225,28 @@ function renderAddCategoryForm() {
     document.getElementById('js-add-category-form-container').innerHTML = formHTML;
 };
 
-function renderEditTaskForm(task, categories) {
+function renderEditCategoryForm(category) {
     const formHTML = `
-        <div id="edit-task-overlay" class="overlay">
-            <div class="add-task-form-container">
-                <button id="close-edit-task-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div id="edit-category-overlay" class="overlay">
+            <div class="edit-category-form-container">
+                <button id="close-edit-category-form-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
                 <div class="form-header">
-                    <h2 class="form-title">Edit Task</h2>
+                    <h2 class="form-title">Edit Category</h2>
                 </div>
                 <form action="">
                     <div class="form-title-container">
-                        <label for="task-title">Title</label>
+                        <label for="edit-category-title-input">Title</label>
                         <div class="input-box">
-                            <input type="text" id="task-title-input" name="task-title" placeholder="Enter the task title" required value="${task.title}">
+                            <input type="text" id="edit-category-title-input" class="edit-category-title-input" name="category-title" placeholder="Enter the category title" required value="${category.title}">
                         </div>
                     </div>
-                    <div class="form-priority-container">
-                        <label for="task-priority">Priority</label>
-                        <select class="form-select" name="task-priority" id="task-priority-select" value="${task.priority}">
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                    </div>
-                    <div class="form-category-container">
-                        <label for="task-category">Category</label>
-                        <select class="form-select" name="task-category" id="task-category-select" value="${task.category.title}">
-                            ${categories.map((category) => {return `<option value="${category.title}">${category.title}</option>`;})}
-                        </select>
-                    </div>
-                    <div class="form-due-date-container">
-                        <label for="task-date">Due Date</label>
-                        <input type="date" id="task-date-input" name="task-date" required value="${task.dueDate}">
-                    </div>
                     <div class="form-submit-btn-container">
-                        <button type="submit" id="js-edit-task-submit-btn" class="add-task-submit-btn">Edit Task</button>
+                        <button type="submit" id="js-edit-category-submit-btn" class="edit-category-submit-btn">Edit Category</button>
                     </div>
                 </form>
             </div>
         </div>
     `;
 
-    document.getElementById('js-add-task-form-container').innerHTML = formHTML;
+    document.getElementById('js-edit-category-form-container').innerHTML = formHTML;
 };

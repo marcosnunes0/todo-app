@@ -1,44 +1,29 @@
 const addTaskButton = document.getElementById('add-task-btn');
 const categoriesButton = document.getElementById('categories-btn');
 const tasksListGrid = document.getElementById('js-tasks-list-grid');
+const categoriesGrid = document.getElementById('js-categories-grid');
 
 function initApp() {
     renderTasks(tasks);
 
     addTaskButton.addEventListener('click', () => {
-        renderAddTaskForm(categories);
-        handleOverlayEvents('add-task-overlay', 'close-add-task-form-btn');
+    renderAddTaskForm(categories);
+    handleOverlayEvents('add-task-overlay', 'close-add-task-form-btn');
 
-        const addTaskSubmitButton = document.getElementById('js-add-task-submit-btn');
+    const addTaskSubmitButton = document.getElementById('js-add-task-submit-btn');
 
-        addTaskSubmitButton.addEventListener('click', (e) => {
-            e.preventDefault();
+    addTaskSubmitButton.addEventListener('click', (e) => {
+        e.preventDefault();
 
-            const title = document.getElementById('task-title-input').value;
-            const priority = document.getElementById('task-priority-select').value;
-            const category = document.getElementById('task-category-select').value;
-            const dueDate = document.getElementById('task-date-input').value;
+        const title = document.getElementById('task-title-input').value;
+        const priority = document.getElementById('task-priority-select').value;
+        const category = document.getElementById('task-category-select').value;
+        const dueDate = document.getElementById('task-date-input').value;
 
-            addTask(title, priority, category, dueDate);
-            renderTasks(tasks);
+        addTask(title, priority, category, dueDate);
+        renderTasks(tasks);
             
-            const overlay = document.getElementById('add-task-overlay');
-            overlay.classList.add('hidden');
-        });
-    });
-
-    categoriesButton.addEventListener('click', () => {
-        renderCategories(categories);
-        handleOverlayEvents('categories-overlay', 'close-categories-btn');
-
-        const addCategoryButton = document.getElementById('add-category-btn');
-
-        addCategoryButton.addEventListener('click', () => {
-            const overlay = document.getElementById('categories-overlay');
-            overlay.classList.add('hidden');
-            
-            renderAddCategoryForm();
-            handleOverlayEvents('add-category-overlay', 'close-add-category-form-btn');
+        hiddenOverlay('add-task-overlay');
         });
     });
 
@@ -73,8 +58,7 @@ function initApp() {
                     editTask(tasks, taskId, title, priority, category, dueDate);
                     renderTasks(tasks);
                     
-                    const overlay = document.getElementById('edit-task-overlay');
-                    overlay.classList.add('hidden');
+                    hiddenOverlay('edit-task-overlay');
                 });
             };
 
@@ -85,6 +69,77 @@ function initApp() {
             };
         });
     }
+
+    categoriesButton.addEventListener('click', () => {
+        renderCategories(categories);
+        handleOverlayEvents('categories-overlay', 'close-categories-btn');
+    });
+
+    if (categoriesGrid) {
+        categoriesGrid.addEventListener('click', (e) => {
+            const addCategoryButton = e.target.closest('.add-category-btn');
+            const editCategoryButton = e.target.closest('.category-edit-btn');
+            const deleteCategoryButton = e.target.closest('.category-delete-btn');
+            
+            if (addCategoryButton) {
+                hiddenOverlay('categories-overlay');
+                
+                renderAddCategoryForm();
+                handleOverlayEvents('add-category-overlay', 'close-add-category-form-btn');
+
+                const addCategorySubmitButton = document.getElementById('js-add-category-submit-btn');
+
+                if (addCategorySubmitButton) {
+                    addCategorySubmitButton.addEventListener('click', (e) => {
+                        e.preventDefault();
+
+                        const title = document.getElementById('add-category-title-input').value;
+                        
+                        addCategory(categories, title);
+                        renderCategories(categories);
+                        handleOverlayEvents('categories-overlay', 'close-categories-btn');
+                        renderTasks(tasks);
+                        
+                        hiddenOverlay('add-category-overlay');
+                    });
+                };
+            };
+
+            if(deleteCategoryButton) {
+                const categoryId = deleteCategoryButton.dataset.categoryId;
+
+                deleteCategory(categories, categoryId);
+                renderCategories(categories);
+                handleOverlayEvents('categories-overlay', 'close-categories-btn');
+                renderTasks(tasks);
+            }
+
+            if(editCategoryButton) {
+                hiddenOverlay('categories-overlay');
+                
+                const categoryId = editCategoryButton.dataset.categoryId;
+                const category = categories.find(category => category.id === categoryId);
+                
+                renderEditCategoryForm(category);
+                handleOverlayEvents('edit-category-overlay', 'close-edit-category-form-btn');
+
+                const editCategorySubmitButton = document.getElementById('js-edit-category-submit-btn');
+
+                editCategorySubmitButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const title = document.getElementById('edit-category-title-input').value;
+                        
+                    editCategory(categories, categoryId, title);
+                    renderCategories(categories);
+                    handleOverlayEvents('categories-overlay', 'close-categories-btn');
+                    renderTasks(tasks);
+                        
+                    hiddenOverlay('edit-category-overlay');
+                });
+            }
+        });
+    };
 };
 
 initApp();

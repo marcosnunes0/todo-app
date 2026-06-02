@@ -75,3 +75,28 @@ function editTask(tasks, taskId, title, priority, category, dueDate) {
         tasks[taskIndex].dueDate = dueDate;
     }
 };
+
+function addCategory(categories, title) {
+    const newCategory = {
+        id: crypto.randomUUID(),
+        title: title.trim(),
+    };
+
+    categories.push(newCategory);
+}
+
+function deleteCategory(categories, categoryId) {
+    const categoryIndex = categories.findIndex((category) => category.id === categoryId);
+
+    if (categoryIndex !== -1) {
+        categories.splice(categoryIndex, 1);
+    }
+}
+
+function editCategory(categories, categoryId, title) {
+    const categoryIndex = categories.findIndex((category) => category.id === categoryId);
+
+    if (categoryIndex !== -1) {
+        categories[categoryIndex].title = title.trim();
+    }
+}
