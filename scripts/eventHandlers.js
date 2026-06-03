@@ -29,9 +29,9 @@ function handleCheckbox(checkBox) {
 }
 
 function handleAddTaskFormSubmit() {
-    const addTaskSubmitButton = document.getElementById('js-add-task-submit-btn');
+    const addTaskForm = document.getElementById('add-task-form');   
 
-    addTaskSubmitButton.addEventListener('click', (e) => {
+    addTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const title = document.getElementById('task-title-input').value;
@@ -47,9 +47,9 @@ function handleAddTaskFormSubmit() {
 };
 
 function handleEditTaskFormSubmit(taskId) {
-    const editTaskSubmitButton = document.getElementById('js-edit-task-submit-btn');
+    const editTaskForm = document.getElementById('edit-task-form');
 
-    editTaskSubmitButton.addEventListener('click', (e) => {
+    editTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const title = document.getElementById('task-title-input').value;
@@ -118,10 +118,10 @@ function handleEditCategory(editButton) {
 };
 
 function handleAddCategoryFormSubmit() {
-    const addCategorySubmitButton = document.getElementById('js-add-category-submit-btn');
+    const addCategoryForm = document.getElementById('add-category-form');
 
-    if (addCategorySubmitButton) {
-        addCategorySubmitButton.addEventListener('click', (e) => {
+    if (addCategoryForm) {
+        addCategoryForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
             const title = document.getElementById('add-category-title-input').value;
@@ -137,10 +137,10 @@ function handleAddCategoryFormSubmit() {
 };
 
 function handleEditCategoryFormSubmit(categoryId) {
-    const editCategorySubmitButton = document.getElementById('js-edit-category-submit-btn');
+    const editCategoryForm = document.getElementById('edit-category-form');
 
-    if (editCategorySubmitButton) {
-        editCategorySubmitButton.addEventListener('click', (e) => {
+    if (editCategoryForm) {
+        editCategoryForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
             const title = document.getElementById('edit-category-title-input').value;

@@ -88,7 +88,7 @@ function renderAddTaskForm(categories) {
                 <div class="form-header">
                     <h2 class="form-title">Add Task</h2>
                 </div>
-                <form action="">
+                <form id="add-task-form" action="">
                     <div class="form-title-container">
                         <label for="task-title-input">Title</label>
                         <div class="input-box">
@@ -135,7 +135,7 @@ function renderEditTaskForm(task, categories) {
                 <div class="form-header">
                     <h2 class="form-title">Edit Task</h2>
                 </div>
-                <form action="">
+                <form id="edit-task-form" action="">
                     <div class="form-title-container">
                         <label for="task-title">Title</label>
                         <div class="input-box">
@@ -218,7 +218,7 @@ function renderAddCategoryForm() {
                 <div class="form-header">
                     <h2 class="add-category-form-title">Add Category</h2>
                 </div>
-                <form action="">
+                <form id="add-category-form" action="">
                     <div class="form-title-container">
                         <label for="add-category-title-input">Title</label>
                         <div class="input-box">
@@ -244,7 +244,7 @@ function renderEditCategoryForm(category) {
                 <div class="form-header">
                     <h2 class="form-title">Edit Category</h2>
                 </div>
-                <form action="">
+                <form id="edit-category-form" action="">
                     <div class="form-title-container">
                         <label for="edit-category-title-input">Title</label>
                         <div class="input-box">
