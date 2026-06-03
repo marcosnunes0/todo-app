@@ -2,6 +2,16 @@ function colorPicker(task) {
     return task.completed ? 'green' : 'red';
 };
 
+function priorityColor(priority) {
+    if (priority === 'High') {
+        return 'red';
+    } else if (priority === 'Medium') {
+        return 'orange';
+    } else {
+        return 'green';
+    }
+};
+
 function handleOverlayEvents(overlayId = 'blur-overlay', closeBtnId = 'close-form-btn') {
     const overlay = document.getElementById(overlayId);
     const closeFormButton = document.getElementById(closeBtnId);
@@ -47,6 +57,7 @@ function renderTasks(tasks) {
                     <span class="task-title">${task.title}</span>
                 </div>
                 <div class="task-priority-container">
+                    <span class="task-priority-color" style="background-color: ${priorityColor(task.priority)}"></span>
                     <span class="task-priority">${task.priority}</span>
                 </div>
                 <div class="task-category-container">

@@ -172,6 +172,10 @@ body {
     .filter select {
         font-size: 0.5rem;
     }
+
+    .task {
+        font-size: 0.8rem;
+    }
 }
 
 .task-checkbox-title-container {
@@ -190,6 +194,13 @@ body {
     align-items: center;
     justify-content: center;
     margin-right: 1rem;
+}
+
+.task-priority-color {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 0.7rem;
 }
 
 .task-category-container {
@@ -214,7 +225,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 1rem;
+    gap: 0.8rem;
     margin-right: 1rem;
 }
 
