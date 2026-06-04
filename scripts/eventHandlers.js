@@ -49,6 +49,7 @@ function handleAddTaskFormSubmit() {
         const dueDate = document.getElementById('task-date-input').value;
 
         addTask(title, priority, category, dueDate);
+        saveTasks(tasks);
         renderTasks(tasks);
             
         hiddenOverlay('add-task-overlay');
@@ -67,6 +68,7 @@ function handleEditTaskFormSubmit(taskId) {
         const dueDate = document.getElementById('task-date-input').value;
 
         editTask(taskId, title, priority, category, dueDate);
+        saveTasks(tasks);
         renderTasks(tasks);
         
         hiddenOverlay('edit-task-overlay');
@@ -110,6 +112,7 @@ function handleDeleteCategory(deleteButton) {
     const categoryId = deleteButton.dataset.categoryId;
 
     deleteCategory(categoryId);
+    saveCategories(categories);
     renderCategories(categories);
     renderTasks(tasks);
     handleOverlayEvents('categories-overlay', 'close-categories-btn');
@@ -136,6 +139,7 @@ function handleAddCategoryFormSubmit() {
             const title = document.getElementById('add-category-title-input').value;
             
             addCategory(title);
+            saveCategories(categories);
             renderCategories(categories);
             handleOverlayEvents('categories-overlay', 'close-categories-btn');
             renderTasks(tasks);
@@ -153,8 +157,9 @@ function handleEditCategoryFormSubmit(categoryId) {
             e.preventDefault();
 
             const title = document.getElementById('edit-category-title-input').value;
-            
+
             editCategory(categoryId, title);
+            saveCategories(categories);
             renderCategories(categories);
             handleOverlayEvents('categories-overlay', 'close-categories-btn');
             renderTasks(tasks);

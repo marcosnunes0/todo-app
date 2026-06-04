@@ -2,8 +2,11 @@ const tasksListGrid = document.getElementById('js-tasks-list-grid');
 const categoriesGrid = document.getElementById('js-categories-grid');
 
 function initApp() {
-    renderTasks(tasks);
+    tasks = loadTasks();
+    categories = loadCategories();
 
+    renderTasks(tasks);
+    
     handleAddTask();
     handleFilteredTasks();
 
@@ -16,6 +19,9 @@ function initApp() {
     if (categoriesGrid) {
         categoriesGrid.addEventListener('click', handleCategoriesActions);
     };
+
+    saveTasks(tasks);
+    saveCategories(categories);
 };
 
 initApp();
