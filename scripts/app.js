@@ -5,6 +5,7 @@ function initApp() {
     renderTasks(tasks);
 
     handleAddTask();
+    handleFilteredTasks();
 
     if (tasksListGrid) {
         tasksListGrid.addEventListener('click', handleTaskActions);

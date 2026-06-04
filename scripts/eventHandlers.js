@@ -8,6 +8,15 @@ function handleAddTask() {
     });
 };
 
+function handleFilteredTasks() {
+    const filter = document.getElementById('filter');
+    
+    filter.addEventListener('change', (e) => {
+        const filteredTasks = getFilteredTasks(e.target.value);
+        renderTasks(filteredTasks);
+    });
+};
+
 function handleDeleteTask(deleteButton) {
     const taskId = deleteButton.dataset.taskId;
     deleteTask(taskId);
@@ -29,7 +38,7 @@ function handleCheckbox(checkBox) {
 }
 
 function handleAddTaskFormSubmit() {
-    const addTaskForm = document.getElementById('add-task-form');   
+    const addTaskForm = document.getElementById('add-task-form');
 
     addTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
