@@ -1,10 +1,27 @@
+import {
+    saveTasks,
+    saveCategories
+} from "./storage.js"
+
+import {
+    renderTasks
+} from "./ui.js";
+
+import {
+    handleAddTask,
+    handleTaskActions,
+    handleFilteredTasks,
+    handleCategoriesButton,
+    handleCategoriesActions
+} from "./eventHandlers.js";
+
+import { tasks } from "./tasks.js";
+import { categories } from "./categories.js";
+
 const tasksListGrid = document.getElementById('js-tasks-list-grid');
 const categoriesGrid = document.getElementById('js-categories-grid');
 
 function initApp() {
-    tasks = loadTasks();
-    categories = loadCategories();
-
     renderTasks(tasks);
     
     handleAddTask();

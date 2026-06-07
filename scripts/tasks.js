@@ -1,8 +1,8 @@
-let categories = [];
+import { loadTasks } from "./storage.js";
 
-let tasks = [];
+export let tasks = loadTasks();
 
-function addTask(title, priority, category, dueDate) {
+export function addTask(title, priority, category, dueDate) {
 
     const newTask = {
         id: crypto.randomUUID(),
@@ -17,7 +17,7 @@ function addTask(title, priority, category, dueDate) {
     tasks.push(newTask);
 };
 
-function deleteTask (taskId) {
+export function deleteTask (taskId) {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
     if (taskIndex !== -1) {
@@ -25,7 +25,7 @@ function deleteTask (taskId) {
     }
 };
 
-function toggleTaskStatus(taskId) {
+export function toggleTaskStatus(taskId) {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
     if (taskIndex !== -1) {
@@ -33,7 +33,7 @@ function toggleTaskStatus(taskId) {
     }
 };
 
-function editTask(taskId, title, priority, category, dueDate) {
+export function editTask(taskId, title, priority, category, dueDate) {
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
     if (taskIndex !== -1) {
@@ -43,48 +43,3 @@ function editTask(taskId, title, priority, category, dueDate) {
         tasks[taskIndex].dueDate = dueDate;
     }
 };
-
-function addCategory(title) {
-    const newCategory = {
-        id: crypto.randomUUID(),
-        title: title.trim(),
-    };
-
-    categories.push(newCategory);
-}
-
-function deleteCategory(categoryId) {
-    const categoryIndex = categories.findIndex((category) => category.id === categoryId);
-
-    if (categoryIndex !== -1) {
-        const categoryTitle = categories[categoryIndex].title;
-        categories.splice(categoryIndex, 1);
-
-        tasks.forEach(task => {
-            if (task.category === categoryTitle) {
-                task.category = "Not defined";
-            }
-        });
-    }
-}
-
-function editCategory(categoryId, title) {
-    const newCategoryTitle = title.trim();
-    const categoryIndex = categories.findIndex((category) => category.id === categoryId);
-
-    if (categoryIndex !== -1) {
-        const oldCategoryTitle = categories[categoryIndex].title;
-
-        if (oldCategoryTitle === newCategoryTitle) {
-            return;
-        }
-        
-        categories[categoryIndex].title = newCategoryTitle;
-
-        tasks.forEach(task => {
-            if (task.category === oldCategoryTitle) {
-                task.category = newCategoryTitle;
-            }
-        });
-    }
-}

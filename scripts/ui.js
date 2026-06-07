@@ -12,7 +12,7 @@ function priorityColor(priority) {
     }
 };
 
-function handleOverlayEvents(overlayId = 'blur-overlay', closeBtnId = 'close-form-btn') {
+export function handleOverlayEvents(overlayId = 'blur-overlay', closeBtnId = 'close-form-btn') {
     const overlay = document.getElementById(overlayId);
     const closeFormButton = document.getElementById(closeBtnId);
 
@@ -31,13 +31,13 @@ function handleOverlayEvents(overlayId = 'blur-overlay', closeBtnId = 'close-for
     }
 };
 
-function hiddenOverlay(overlayId = 'blur-overlay') {
+export function hiddenOverlay(overlayId = 'blur-overlay') {
     const overlay = document.getElementById(overlayId);
 
     if (overlay) overlay.classList.add('hidden');
 }
 
-function renderTasks(tasks) {
+export function renderTasks(tasks) {
     let tasksHTML = '';
 
     if (tasks.length === 0) {
@@ -79,7 +79,7 @@ function renderTasks(tasks) {
     document.getElementById('js-tasks-list-grid').innerHTML = tasksHTML;
 };
 
-function renderAddTaskForm(categories) {
+export function renderAddTaskForm(categories) {
 
     const formHTML = `
         <div id="add-task-overlay" class="overlay">
@@ -108,7 +108,7 @@ function renderAddTaskForm(categories) {
                         <label for="task-category-select">Category</label>
                         <select class="form-select" name="task-category" id="task-category-select" required>
                             <option value="" disabled selected>Selecione uma categoria</option>
-                            ${categories.map((category) => {return `<option value="${category.title}">${category.title}</option>`;})}
+                            ${categories.map((category) => `<option value="${category.title}">${category.title}</option>`).join('')}
                         </select>
                     </div>
                     <div class="form-due-date-container">
@@ -127,7 +127,7 @@ function renderAddTaskForm(categories) {
 };
 
 
-function renderEditTaskForm(task, categories) {
+export function renderEditTaskForm(task, categories) {
     const formHTML = `
         <div id="edit-task-overlay" class="overlay">
             <div class="add-task-form-container">
@@ -144,16 +144,19 @@ function renderEditTaskForm(task, categories) {
                     </div>
                     <div class="form-priority-container">
                         <label for="task-priority">Priority</label>
-                        <select class="form-select" name="task-priority" id="task-priority-select" value="${task.priority}">
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
+                        <select class="form-select" name="task-priority" id="task-priority-select">
+                            <option value="High" ${task.priority === 'High' ? 'selected' : ''}>High</option>
+                            <option value="Medium" ${task.priority === 'Medium' ? 'selected' : ''}>Medium</option>
+                            <option value="Low" ${task.priority === 'Low' ? 'selected' : ''}>Low</option>
                         </select>
                     </div>
                     <div class="form-category-container">
                         <label for="task-category">Category</label>
-                        <select class="form-select" name="task-category" id="task-category-select" value="${task.category.title}">
-                            ${categories.map((category) => {return `<option value="${category.title}">${category.title}</option>`;})}
+                        <select class="form-select" name="task-category" id="task-category-select">
+                            ${categories.map((category) => {
+                                const selected = category.title === task.category ? 'selected' : '';
+                                return `<option value="${category.title}" ${selected}>${category.title}</option>`;
+                            }).join('')}
                         </select>
                     </div>
                     <div class="form-due-date-container">
@@ -171,7 +174,7 @@ function renderEditTaskForm(task, categories) {
     document.getElementById('js-add-task-form-container').innerHTML = formHTML;
 };
 
-function renderCategories(categories) {
+export function renderCategories(categories) {
     let categoryItemsHTML = '';
 
     categories.forEach((category) => {
@@ -210,7 +213,7 @@ function renderCategories(categories) {
     container.style.setProperty('--rows', numberOfRows);
 }
 
-function renderAddCategoryForm() {
+export function renderAddCategoryForm() {
     const formHTML = `
         <div id="add-category-overlay" class="overlay">
             <div class="add-category-form-container">
@@ -236,7 +239,7 @@ function renderAddCategoryForm() {
     document.getElementById('js-add-category-form-container').innerHTML = formHTML;
 };
 
-function renderEditCategoryForm(category) {
+export function renderEditCategoryForm(category) {
     const formHTML = `
         <div id="edit-category-overlay" class="overlay">
             <div class="edit-category-form-container">

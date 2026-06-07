@@ -1,4 +1,40 @@
-function handleAddTask() {
+import {
+    renderAddTaskForm,
+    hiddenOverlay,
+    renderEditTaskForm,
+    renderCategories,
+    renderAddCategoryForm,
+    renderEditCategoryForm,
+    renderTasks,
+    handleOverlayEvents
+} from "./ui.js";
+
+
+import {
+    addTask,
+    editTask,
+    deleteTask,
+    toggleTaskStatus,
+    tasks
+} from "./tasks.js";
+
+import {
+    addCategory,
+    deleteCategory,
+    editCategory,
+    categories
+} from "./categories.js";
+
+import {
+    getFilteredTasks
+} from "./filters.js";
+
+import {
+    saveTasks,
+    saveCategories
+} from "./storage.js";
+
+export function handleAddTask() {
     const addTaskButton = document.getElementById('add-task-btn');
 
     addTaskButton.addEventListener('click', () => {
@@ -8,7 +44,7 @@ function handleAddTask() {
     });
 };
 
-function handleFilteredTasks() {
+export function handleFilteredTasks() {
     const filter = document.getElementById('filter');
     
     filter.addEventListener('change', (e) => {
@@ -17,13 +53,14 @@ function handleFilteredTasks() {
     });
 };
 
-function handleDeleteTask(deleteButton) {
+export function handleDeleteTask(deleteButton) {
     const taskId = deleteButton.dataset.taskId;
     deleteTask(taskId);
+    saveTasks(tasks);
     renderTasks(tasks);
 };
 
-function handleEditTask(editButton) {
+export function handleEditTask(editButton) {
     const taskId = editButton.dataset.taskId;
     const task = tasks.find(task => task.id === taskId);
     renderEditTaskForm(task, categories);
@@ -31,13 +68,14 @@ function handleEditTask(editButton) {
     handleEditTaskFormSubmit(taskId);
 }
 
-function handleCheckbox(checkBox) {
+export function handleCheckbox(checkBox) {
     const taskId = checkBox.dataset.taskId;
     toggleTaskStatus(taskId);
+    saveTasks(tasks);
     renderTasks(tasks);
 }
 
-function handleAddTaskFormSubmit() {
+export function handleAddTaskFormSubmit() {
     const addTaskForm = document.getElementById('add-task-form');
 
     addTaskForm.addEventListener('submit', (e) => {
@@ -56,7 +94,7 @@ function handleAddTaskFormSubmit() {
     });
 };
 
-function handleEditTaskFormSubmit(taskId) {
+export function handleEditTaskFormSubmit(taskId) {
     const editTaskForm = document.getElementById('edit-task-form');
 
     editTaskForm.addEventListener('submit', (e) => {
@@ -75,7 +113,7 @@ function handleEditTaskFormSubmit(taskId) {
     });
 };
 
-function handleTaskActions(event) {
+export function handleTaskActions(event) {
     const deleteButton = event.target.closest('.delete-btn');
     const editButton = event.target.closest('.edit-btn');
     const checkBox = event.target.closest('.checkbox');
@@ -93,22 +131,22 @@ function handleTaskActions(event) {
     }
 };
 
-function handleCategoriesButton() {
+export function handleCategoriesButton() {
     const categoriesButton = document.getElementById('categories-btn');
     categoriesButton.addEventListener('click', () => {
         renderCategories(categories);
-        handleOverlayEvents('categories-overlay', 'close-categories-overlay-btn');
+        handleOverlayEvents('categories-overlay', 'close-categories-btn');
     });
 };
 
-function handleAddCategory(addCategoryButton) {
+export function handleAddCategory(addCategoryButton) {
     hiddenOverlay('categories-overlay');
     renderAddCategoryForm();
     handleOverlayEvents('add-category-overlay', 'close-add-category-form-btn');
     handleAddCategoryFormSubmit();
 };
 
-function handleDeleteCategory(deleteButton) {
+export function handleDeleteCategory(deleteButton) {
     const categoryId = deleteButton.dataset.categoryId;
 
     deleteCategory(categoryId);
@@ -118,7 +156,7 @@ function handleDeleteCategory(deleteButton) {
     handleOverlayEvents('categories-overlay', 'close-categories-btn');
 };
 
-function handleEditCategory(editButton) {
+export function handleEditCategory(editButton) {
     hiddenOverlay('categories-overlay');
     
     const categoryId = editButton.dataset.categoryId;
@@ -129,7 +167,7 @@ function handleEditCategory(editButton) {
     handleEditCategoryFormSubmit(categoryId);
 };
 
-function handleAddCategoryFormSubmit() {
+export function handleAddCategoryFormSubmit() {
     const addCategoryForm = document.getElementById('add-category-form');
 
     if (addCategoryForm) {
@@ -149,7 +187,7 @@ function handleAddCategoryFormSubmit() {
     };
 };
 
-function handleEditCategoryFormSubmit(categoryId) {
+export function handleEditCategoryFormSubmit(categoryId) {
     const editCategoryForm = document.getElementById('edit-category-form');
 
     if (editCategoryForm) {
@@ -169,7 +207,7 @@ function handleEditCategoryFormSubmit(categoryId) {
     };
 };
 
-function handleCategoriesActions(event) {
+export function handleCategoriesActions(event) {
     const addCategoryButton = event.target.closest('.add-category-btn');
     const editCategoryButton = event.target.closest('.category-edit-btn');
     const deleteCategoryButton = event.target.closest('.category-delete-btn');

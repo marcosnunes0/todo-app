@@ -1,4 +1,6 @@
-function getFilteredTasks(filter) {
+import { tasks } from "./tasks.js";
+
+export function getFilteredTasks(filter) {
     let filteredTasks = [];
 
     switch (filter) {
