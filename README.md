@@ -32,9 +32,7 @@ A fully client-side **Todo List** web application built with **vanilla HTML, CSS
 <a id="demo"></a>
 ## 🎥 Demo
 
-Watch the application in action:
-
-<video src="https://github.com/marcosnunes0/todo-app/raw/main/assets/Todo-App-Demo.mp4" controls width="640"></video>
+https://github.com/user-attachments/assets/1592a883-e6d2-44b9-98c1-7bddce194bd1
 
 ---
 
