@@ -139,7 +139,7 @@ export function handleCategoriesButton() {
     });
 };
 
-export function handleAddCategory(addCategoryButton) {
+export function handleAddCategory() {
     hiddenOverlay('categories-overlay');
     renderAddCategoryForm();
     handleOverlayEvents('add-category-overlay', 'close-add-category-form-btn');
@@ -150,6 +150,7 @@ export function handleDeleteCategory(deleteButton) {
     const categoryId = deleteButton.dataset.categoryId;
 
     deleteCategory(categoryId);
+    saveTasks(tasks);
     saveCategories(categories);
     renderCategories(categories);
     renderTasks(tasks);
@@ -197,6 +198,7 @@ export function handleEditCategoryFormSubmit(categoryId) {
             const title = document.getElementById('edit-category-title-input').value;
 
             editCategory(categoryId, title);
+            saveTasks(tasks);
             saveCategories(categories);
             renderCategories(categories);
             handleOverlayEvents('categories-overlay', 'close-categories-btn');
