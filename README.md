@@ -4,8 +4,10 @@ A fully client-side **Todo List** web application built with **vanilla HTML, CSS
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
+- [Demo](#demo)
+- [Mobile Screenshots](#mobile-screenshots)
 - [Overview](#overview)
 - [Features](#features)
 - [Technologies](#technologies)
@@ -27,22 +29,44 @@ A fully client-side **Todo List** web application built with **vanilla HTML, CSS
 
 ---
 
-## Overview
+## 🎥 Demo
+
+<video src="assets/Todo-App-Demo.mp4" controls width="640"></video>
+
+---
+
+## 📱 Mobile Screenshots
+
+<div align="center">
+
+| Home Page | Add Task | Categories |
+|:-:|:-:|:-:|
+| <img src="assets/mobile-todo-app-home-page.png" alt="Home Page" width="180"> | <img src="assets/mobile-todo-app-add-task.png" alt="Add Task" width="180"> | <img src="assets/mobile-todo-app-categories.png" alt="Categories" width="180"> |
+
+| Edit Task | Add Category |
+|:-:|:-:|
+| <img src="assets/mobile-todo-app-edit-task.png" alt="Edit Task" width="180"> | <img src="assets/mobile-todo-app-add-category.png" alt="Add Category" width="180"> |
+
+</div>
+
+---
+
+## 🔍 Overview
 
 This project is a single-page, front-end-only task management application. It was built as a learning exercise to practice core JavaScript concepts including:
 
-- **ES Modules** (`import` / `export`) for code organization
-- **DOM manipulation** via `innerHTML` and template literals
-- **Event delegation** for dynamically generated elements
-- **`localStorage`** for client-side data persistence
-- **CSS Grid & Flexbox** for responsive layout
-- **Overlay / modal patterns** for form-based interactions
+- 📦 **ES Modules** (`import` / `export`) for clean code organization.
+- 🌲 **DOM manipulation** via `innerHTML` and template literals to update the user interface dynamically.
+- ⚡ **Event delegation** for handling actions on dynamically generated grid elements.
+- 💾 **`localStorage`** for persistent client-side data storage across page reloads.
+- 📱 **CSS Grid & Flexbox** for a fluid, responsive layout targeting mobile and desktop.
+- 🖼️ **Overlay / modal patterns** for form-based user interactions with background blurring.
 
 No build tools, frameworks or package managers are required, the app runs directly in the browser from a static HTML file.
 
 ---
 
-## Features
+## ✨ Features
 
 | Feature | Description |
 |---|---|
@@ -60,7 +84,7 @@ No build tools, frameworks or package managers are required, the app runs direct
 
 ---
 
-## Technologies
+## 🛠️ Technologies
 
 | Technology | Usage |
 |---|---|
@@ -71,7 +95,7 @@ No build tools, frameworks or package managers are required, the app runs direct
 
 ---
 
-## Architecture
+## 📐 Architecture
 
 The application follows a **modular, layered architecture** with clear separation of concerns:
 
@@ -115,7 +139,7 @@ The application follows a **modular, layered architecture** with clear separatio
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 todo-list-app-ex1/
@@ -136,9 +160,9 @@ todo-list-app-ex1/
 
 ---
 
-## Module Breakdown
+## 🧱 Module Breakdown
 
-### `app.js` - Entry Point
+### 🚀 `app.js` - Entry Point
 
 The module that initializes the application. It:
 
@@ -147,7 +171,7 @@ The module that initializes the application. It:
 3. Attaches top-level event listeners for the "Add Task" button, filter dropdown, "Categories" button and delegated click handlers on the task and category grids.
 4. Persists initial state to `localStorage`.
 
-### `tasks.js` - Task Data Model
+### 📋 `tasks.js` - Task Data Model
 
 Exports the `tasks` array (loaded from storage on module initialization) and four data-manipulation functions:
 
@@ -158,7 +182,7 @@ Exports the `tasks` array (loaded from storage on module initialization) and fou
 | `toggleTaskStatus(taskId)` | Flips the `completed` boolean on a task. |
 | `editTask(taskId, title, priority, category, dueDate)` | Updates all editable fields on an existing task. |
 
-### `categories.js` - Category Data Model
+### 🏷️ `categories.js` - Category Data Model
 
 Exports the `categories` array and three functions:
 
@@ -168,7 +192,7 @@ Exports the `categories` array and three functions:
 | `deleteCategory(categoryId)` | Removes the category and reassigns all associated tasks to `"Not defined"`. |
 | `editCategory(categoryId, title)` | Renames the category and propagates the new name to all associated tasks. |
 
-### `storage.js` - Persistence Layer
+### 💾 `storage.js` - Persistence Layer
 
 A thin abstraction over `localStorage` providing four functions:
 
@@ -179,7 +203,7 @@ A thin abstraction over `localStorage` providing four functions:
 | `saveCategories(categories)` | Serializes and stores the categories array under the `"categories"` key. |
 | `loadCategories()` | Deserializes the categories array, returning `[]` if nothing is stored. |
 
-### `filters.js` - Filtering Logic
+### 🔍 `filters.js` - Filtering Logic
 
 Exports a single function:
 
@@ -187,7 +211,7 @@ Exports a single function:
 |---|---|
 | `getFilteredTasks(filter)` | Accepts `"all"`, `"pending"` or `"completed"` and returns the corresponding subset of the tasks array. |
 
-### `ui.js` - Rendering Engine
+### 🎨 `ui.js` - Rendering Engine
 
 The largest module, responsible for generating HTML strings via template literals and injecting them into the DOM. It contains:
 
@@ -209,7 +233,7 @@ The largest module, responsible for generating HTML strings via template literal
 | `colorPicker(task)` | Returns `"green"` for completed tasks and `"red"` for pending. |
 | `priorityColor(priority)` | Maps priority levels to colors: High → red, Medium → orange, Low → green. |
 
-### `eventHandlers.js` - User Interaction Layer
+### ⚡ `eventHandlers.js` - User Interaction Layer
 
 Acts as the **controller** layer, bridging UI events with data operations and re-renders. It orchestrates the full lifecycle for each user action:
 
@@ -220,7 +244,7 @@ Acts as the **controller** layer, bridging UI events with data operations and re
 5. **Re-render** the affected UI sections.
 6. **Dismiss** the modal overlay if applicable.
 
-### `styles.css` - Styling
+### 🖌️ `styles.css` - Styling
 
 A single CSS file that styles the entire application, including:
 
@@ -234,7 +258,7 @@ A single CSS file that styles the entire application, including:
 
 ---
 
-## Data Models
+## 🗃️ Data Models
 
 ### Task Object
 
@@ -261,7 +285,7 @@ A single CSS file that styles the entire application, including:
 
 ---
 
-## How It Works
+## ⚙️ How It Works
 
 1. **On page load**, `app.js` runs `initApp()`, which loads saved data from `localStorage`, renders the task list and sets up all event listeners.
 2. **Adding a task**: Clicking "Add Task" opens a modal form. On submission, a new task object is created, pushed to the in-memory array, saved to `localStorage` and the task list is re-rendered.
@@ -273,21 +297,21 @@ A single CSS file that styles the entire application, including:
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
-### Prerequisites
+### 📋 Prerequisites
 
 - A modern web browser (Chrome, Firefox, Edge, Safari) that supports ES Modules and `crypto.randomUUID()`.
 
-### Running Locally
+### 💻 Running Locally
 
-1. **Clone the repository:**
+1. 👥 **Clone the repository:**
    ```bash
    git clone https://github.com/marcosnunes0/todo-app.git
    cd todo-app
    ```
 
-2. **Open `index.html` in your browser:**
+2. 🌐 **Open `index.html` in your browser:**
    - Simply double-click the file, **or**
    - Use a local development server (recommended for ES Modules):
      ```bash
@@ -303,8 +327,6 @@ A single CSS file that styles the entire application, including:
 
 ---
 
-## License
+## 📄 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
-**Copyright © 2026 Marcos Nunes**
