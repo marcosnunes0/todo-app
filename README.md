@@ -12,14 +12,14 @@ A fully client-side **Todo List** web application built with **vanilla HTML, CSS
 - [Architecture](#architecture)
 - [Project Structure](#project-structure)
 - [Module Breakdown](#module-breakdown)
-  - [app.js - Entry Point](#appjs-entry-point)
-  - [tasks.js - Task Data Model](#tasksjs-task-data-model)
-  - [categories.js - Category Data Model](#categoriesjs-category-data-model)
-  - [storage.js - Persistence Layer](#storagejs-persistence-layer)
-  - [filters.js - Filtering Logic](#filtersjs-filtering-logic)
-  - [ui.js - Rendering Engine](#uijs-rendering-engine)
-  - [eventHandlers.js - User Interaction Layer](#eventhandlersjs-user-interaction-layer)
-  - [styles.css - Styling](#stylescss-styling)
+  - [app.js - Entry Point](#appjs---entry-point)
+  - [tasks.js - Task Data Model](#tasksjs---task-data-model)
+  - [categories.js - Category Data Model](#categoriesjs---category-data-model)
+  - [storage.js - Persistence Layer](#storagejs---persistence-layer)
+  - [filters.js - Filtering Logic](#filtersjs---filtering-logic)
+  - [ui.js - Rendering Engine](#uijs---rendering-engine)
+  - [eventHandlers.js - User Interaction Layer](#eventhandlersjs---user-interaction-layer)
+  - [styles.css - Styling](#stylescss---styling)
 - [Data Models](#data-models)
 - [How It Works](#how-it-works)
 - [Getting Started](#getting-started)
@@ -76,34 +76,34 @@ No build tools, frameworks or package managers are required, the app runs direct
 The application follows a **modular, layered architecture** with clear separation of concerns:
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                   index.html                        │
-│            (Static shell & mount points)            │
-└──────────────────────┬──────────────────────────────┘
-                       │ loads
-                       ▼
-┌─────────────────────────────────────────────────────┐
-│                    app.js                           │
-│                 (Entry point)                       │
-└───┬──────────┬──────────┬──────────┬────────────────┘
-    │          │          │          │
-    ▼          ▼          ▼          ▼
+┌────────────────────────────────────────────────────────┐
+│                      index.html                        │
+│               (Static shell & mount points)            │
+└───────────────────────────┬────────────────────────────┘
+                            │ loads
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│                       app.js                           │
+│                    (Entry point)                       │
+└───┬──────────────┬─────────────┬──────────────┬────────┘
+    │              │             │              │
+    ▼              ▼             ▼              ▼
 ┌────────┐ ┌─────────────┐ ┌──────────┐ ┌────────────────┐
 │tasks.js│ │categories.js│ │filters.js│ │eventHandlers.js│
 │ (Data) │ │   (Data)    │ │ (Logic)  │ │   (Controls)   │
 └───┬────┘ └───┬─────────┘ └───┬──────┘ └────────┬───────┘
-    │          │             │                  │
-    ▼          ▼             ▼                  ▼
-┌─────────────────────────────────────────────────────┐
-│                   storage.js                        │
-│           (localStorage persistence)                │
-└─────────────────────────────────────────────────────┘
-                       ▲
-                       │ renders via
-┌─────────────────────────────────────────────────────┐
-│                     ui.js                           │
-│         (HTML generation & DOM injection)           │
-└─────────────────────────────────────────────────────┘
+    │          │               │                 │
+    ▼          ▼               ▼                 ▼
+┌────────────────────────────────────────────────────────┐
+│                      storage.js                        │
+│              (localStorage persistence)                │
+└────────────────────────────────────────────────────────┘
+                          ▲
+                          │ renders via
+┌────────────────────────────────────────────────────────┐
+│                     ui.js                              │
+│         (HTML generation & DOM injection)              │
+└────────────────────────────────────────────────────────┘
 ```
 
 ### Design Principles
@@ -242,7 +242,7 @@ A single CSS file that styles the entire application, including:
 {
   id: "uuid-string",          // Generated via crypto.randomUUID()
   title: "Task title",        // User-provided, trimmed
-  completed: false,            // Boolean toggle
+  completed: false,           // Boolean toggle
   priority: "High",           // "High" | "Medium" | "Low"
   category: "Work",           // Category title string or "Not defined"
   dueDate: "2026-06-15",      // ISO date string (YYYY-MM-DD)
